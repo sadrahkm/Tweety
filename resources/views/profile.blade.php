@@ -24,7 +24,7 @@
             {{ $user->description }}
         </p>
         <img src="{{ $user->avatar }}" alt=""
-             class="absolute rounded-full" style="width: 150px; left: calc(50% - 75px); top: 138px;">
+             class="absolute rounded-full" style="width: 150px; height: 150px; left: calc(50% - 75px); top: 138px;">
 
 
     </header>
