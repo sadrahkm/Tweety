@@ -12,4 +12,10 @@ class TweetImage extends Model
         return $this->belongsTo(Tweet::class);
     }
 
+    public function getPathAttribute($value)
+    {
+        if ($value)
+            return asset("storage/" . $value);
+        return $value;
+    }
 }

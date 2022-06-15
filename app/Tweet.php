@@ -19,13 +19,4 @@ class Tweet extends Model
     {
         return $this->hasMany(TweetImage::class);
     }
-
-    public function getPathAttribute($value)
-    {
-        if ($value)
-            return asset("storage/" . $value);
-        return $value;
-    }
-
-
 }
