@@ -32,34 +32,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getAvatarAttribute($value)
-    {
-        $value = $value ? ("storage/" . $value) : '';
-        return asset($value ?: '/images/default-avatar.jpeg');
-    }
-
-    public function getBannerAttribute($value)
-    {
-        $value = $value ? ("storage/" . $value) : '';
-        return asset($value ?: '/images/default-profile-banner.jpg');
-    }
-
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = $value;
-    }
-
-    public function timeline()
-    {
-        $friends = $this->follows()->get()->pluck('id');
-        return Tweet::whereIn('user_id', $friends)
-            ->orWhere('user_id', $this->id)
-            ->withLikes()
-            ->with('images')
-            ->orderByDesc('id')
-            ->paginate(5);
-    }
-
     public function tweets()
     {
         return $this->hasMany(Tweet::class)->latest();
@@ -75,5 +47,33 @@ class User extends Authenticatable
         $path = route('profile', $this);
 
         return $append ? "{$path}/{$append}" : $path;
+    }
+
+    public function getAvatarAttribute($value)
+    {
+        $value = $value ? ("storage/" . $value) : '';
+        return asset($value ?: '/images/default-avatar.jpeg');
+    }
+
+    public function getBannerAttribute($value)
+    {
+        $value = $value ? ("storage/" . $value) : '';
+        return asset($value ?: '/images/default-profile-banner.jpg');
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function timeline()
+    {
+        $friends = $this->follows()->get()->pluck('id');
+        return Tweet::whereIn('user_id', $friends)
+            ->orWhere('user_id', $this->id)
+            ->withLikes()
+            ->with('images')
+            ->orderByDesc('id')
+            ->paginate(5);
     }
 }
