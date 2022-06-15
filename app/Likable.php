@@ -89,7 +89,7 @@ trait Likable
     public function scopeWithLikes(Builder $query)
     {
         return $query->leftJoinSub(
-            'select tweet_id,sum(liked) as likes,sum(!liked) as dislikes from likes group by tweet_id',
+            'select tweet_id,sum(liked::int) as likes,sum((not liked)::int) as dislikes from likes group by tweet_id',
             'likeTable',
             'tweets.id',
             'likeTable.tweet_id'
