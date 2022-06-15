@@ -12,15 +12,25 @@ In addition, you can edit your profile like changing you profile picture or your
 ## Installation
 First you should clone this project using the below command.
 
-`git clone https://github.com/sadrahkm/Tweety.git`
+```
+git clone https://github.com/sadrahkm/Tweety.git
+```
 
 Then you must install all the dependencies of the project.
 
-`composer install`
+```
+composer install
+```
 
 It's done! You can use the following command to bring up your project on localhost:8000 (default).
 
-`php artisan serve`
+```
+php artisan serve
+```
+
+## Using PostgreSQL
+You can also use this project with PostgreSQL database. The only thing you have to do is to get a pull from `pgsql` branch
+and set your configuration in `.env` file.
 
 ## Laracasts
 I've done this project beside the [laracasts course](https://laracasts.com/series/laravel-6-from-scratch). You can use
